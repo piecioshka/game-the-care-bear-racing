@@ -7,14 +7,14 @@ export default {
 	},
 
 	create() {
-        this.world.setBounds(0, 0, 1600, 1200);
+        this.physics.startSystem(Phaser.Physics.P2JS);
 
         this.starfield = this.add.tileSprite(0, 0, 800, 600, 'background');
         this.starfield.fixedToCamera = true;
 
 		this.player = this.add.sprite(40, 100, 'bear1');
         this.player.anchor.setTo(0.5, 0.5);
-		//this.player.collideWorldBounds = true;
+		this.player.collideWorldBounds = true;
 		this.physics.arcade.enable(this.player, true);
 
 
