@@ -1,5 +1,3 @@
-import GameState from './GameState';
-
 export default {
     preload() {
         this.load.image('background', 'images/starfield.jpg');
@@ -17,10 +15,6 @@ export default {
     },
 
     playGame() {
-        console.log(this);
-        Phaser.Game.state.add('Game', GameState);
-        Phaser.Game.state.start('Game');
-        //this.state.add('GameState', GameState);
-        //this.state.start('GameState');
+        this.game.state.start('GameState');
     }
 }
