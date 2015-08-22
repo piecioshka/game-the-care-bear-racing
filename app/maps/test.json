@@ -10,6 +10,17 @@
          "width":60,
          "x":0,
          "y":0
+        }, 
+        {
+         "height":60,
+         "image":"background.png",
+         "name":"mapBackground",
+         "opacity":1,
+         "type":"imagelayer",
+         "visible":false,
+         "width":60,
+         "x":0,
+         "y":0
         }],
  "nextobjectid":1,
  "orientation":"orthogonal",
