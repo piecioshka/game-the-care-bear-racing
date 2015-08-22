@@ -9,14 +9,12 @@ export default {
 	create() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
-        this.starfield = this.add.tileSprite(0, 0, 800, 600, 'background');
+        this.starfield = this.add.tileSprite(0, 0, 2400, 2400, 'background');
         this.starfield.fixedToCamera = true;
 
 		this.player = this.add.sprite(40, 100, 'bear1');
         this.player.anchor.setTo(0.5, 0.5);
-		this.player.collideWorldBounds = true;
 		this.physics.arcade.enable(this.player, true);
-
 
 		this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -27,10 +25,7 @@ export default {
 		this.world = this.map.createLayer('Tile Layer 1');
 		this.world.resizeWorld();
 
-        this.game.world.setBounds(0, 0, 2400, 2400);
-
 		this.physics.arcade.collide(this.player, this.map);
->>>>>>> Stashed changes
         this.camera.follow(this.player);
 	},
 
