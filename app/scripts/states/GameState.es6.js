@@ -2,26 +2,34 @@ export default {
 	preload() {
 		this.load.image('bear1', 'images/bear1.png');
 		this.load.spritesheet('tecza', 'maps/tecza.png', 40, 40);
-
+        this.load.image('background', 'images/starfield.jpg');
 		this.load.tilemap('podloze', 'maps/test.json', null, Phaser.Tilemap.TILED_JSON);
 	},
 
 	create() {
+        this.world.setBounds(0, 0, 1600, 1200);
+
+        this.starfield = this.add.tileSprite(0, 0, 800, 600, 'background');
+        this.starfield.fixedToCamera = true;
+
 		this.player = this.add.sprite(0.5, 0.5, 'bear1');
         this.player.anchor.setTo(0.5, 0.5);
-		this.player.collideWorldBounds = true;
-		this.physics.arcade.enable(this.player);
+		//this.player.collideWorldBounds = true;
+		this.physics.arcade.enable(this.player, true);
+
 
 		this.cursors = this.input.keyboard.createCursorKeys();
 
-		this.map = this.add.tilemap('podloze');
-		this.map.addTilesetImage('tecza');
+		//this.map = this.add.tilemap('podloze');
+		//this.map.addTilesetImage('tecza');
 
-		this.world = this.map.createLayer('Tile Layer 1');
-		this.world.resizeWorld();
+		//this.world = this.map.createLayer('Tile Layer 1');
+		//this.world.resizeWorld();
 
-		this.physics.startSystem(Phaser.Physics.ARCADE);
+		//this.physics.startSystem(Phaser.Physics.P2JS);
 		this.physics.arcade.collide(this.player, this.map);
+
+        this.camera.follow(this.player);
 	},
 
 	update () {
@@ -42,5 +50,13 @@ export default {
 		if (this.cursors.up.isDown) {
             this.physics.arcade.velocityFromAngle(this.player.angle, 300, this.player.body.velocity);
 		}
+
+        if (!this.camera.atLimit.x) {
+            this.starfield.tilePosition.x -= ((this.player.body.velocity.x) * this.time.physicsElapsed);
+        }
+
+        if (!this.camera.atLimit.y) {
+            this.starfield.tilePosition.y -= ((this.player.body.velocity.y) * this.time.physicsElapsed);
+        }
 	}
 }
