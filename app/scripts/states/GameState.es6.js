@@ -4,6 +4,7 @@ export default {
 		this.load.spritesheet('tecza', 'maps/tecza.png', 40, 40);
 
 		this.load.tilemap('podloze', 'maps/test.json', null, Phaser.Tilemap.TILED_JSON);
+        this.stage.setBackgroundColor('#fff f00');
 	},
 
 	create() {
