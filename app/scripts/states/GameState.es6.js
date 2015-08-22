@@ -1,14 +1,29 @@
-import RacingPlatform from '../objects/RacingPlatform.es6';
-import Bear from '../objects/Bear.es6';
+export default {
+	preload() {
+		this.load.image('bear1', 'images/bear1.png');
 
-class GameState extends Phaser.State {
+		this.load.tilemap('podloze', 'maps/test.json', null, Phaser.Tilemap.TILED_JSON);
+	},
 
 	create() {
-		console.log('new Bear(this.game)')
-		let center = { x: this.game.world.centerX, y: this.game.world.centerY }
-		let text = new RacingPlatform(this.game, new Bear(this.game, Math.floor(Math.random() * 5) + 1));
+		this.player = this.add.sprite(0, 0, 'bear1');
+		this.player.collideWorldBounds = true;
+		this.physics.arcade.enable(this.player);
+
+		var map = this.add.tilemap('podloze');
+
+		map.addTilesetImage('Plansza', 'tiles');
+
+		this.cursors = this.input.keyboard.createCursorKeys();
+	},
+
+	update () {
+		if (this.cursors.left.isDown) {
+			this.player.body.velocity.x = -150;
+		}
+
+		if (this.cursors.right.isDown) {
+			this.player.body.velocity.x = 150;
+		}
 	}
-
 }
-
-export default GameState;
