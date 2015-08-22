@@ -7,7 +7,8 @@ export default {
 	},
 
 	create() {
-		this.player = this.add.sprite(0, 0, 'bear1');
+		this.player = this.add.sprite(0.5, 0.5, 'bear1');
+        this.player.anchor.setTo(0.5, 0.5);
 		this.player.collideWorldBounds = true;
 		this.physics.arcade.enable(this.player);
 
@@ -24,20 +25,22 @@ export default {
 	},
 
 	update () {
+        this.physics.arcade.collide(this.player, this.world);
+
+        this.player.body.velocity.x = 0;
+        this.player.body.velocity.y = 0;
+        this.player.body.angularVelocity = 0;
+
 		if (this.cursors.left.isDown) {
-			this.player.body.velocity.x = -150;
+			this.player.body.angularVelocity = -150;
 		}
 
 		if (this.cursors.right.isDown) {
-			this.player.body.velocity.x = 150;
+			this.player.body.angularVelocity = 150;
 		}
 
 		if (this.cursors.up.isDown) {
-			this.player.body.velocity.y = -150;
-		}
-
-		if (this.cursors.down.isDown) {
-			this.player.body.velocity.y = 150;
+            this.physics.arcade.velocityFromAngle(this.player.angle, 300, this.player.body.velocity);
 		}
 	}
 }
