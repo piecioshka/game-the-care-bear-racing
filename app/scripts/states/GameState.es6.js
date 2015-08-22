@@ -5,10 +5,12 @@ export default {
 		this.load.spritesheet('bg', 'maps/bg.png', 40, 40);
         this.load.image('background', 'images/starfield.jpg');
 		this.load.tilemap('podloze', 'maps/test.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.audio('music', ['audio/bodenstaendig_2000_in_rock_4bit.mp3', 'audio/bodenstaendig_2000_in_rock_4bit.ogg']);
 	},
 
 	create() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
+        this.sound.play('music');
 
         this.starfield = this.add.tileSprite(0, 0, 2400, 2400, 'background');
         //this.starfield.fixedToCamera = true;
