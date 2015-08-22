@@ -4,30 +4,29 @@ export default {
 		this.load.spritesheet('tecza', 'maps/tecza.png', 40, 40);
         this.load.image('background', 'images/starfield.jpg');
 		this.load.tilemap('podloze', 'maps/test.json', null, Phaser.Tilemap.TILED_JSON);
-        this.stage.setBackgroundColor('#fff f00');
 	},
 
 	create() {
-        this.world.setBounds(0, 0, 1600, 1200);
+        this.physics.startSystem(Phaser.Physics.P2JS);
 
         this.starfield = this.add.tileSprite(0, 0, 800, 600, 'background');
         this.starfield.fixedToCamera = true;
 
 		this.player = this.add.sprite(0.5, 0.5, 'bear1');
         this.player.anchor.setTo(0.5, 0.5);
-		//this.player.collideWorldBounds = true;
+		this.player.collideWorldBounds = true;
 		this.physics.arcade.enable(this.player, true);
 
 
 		this.cursors = this.input.keyboard.createCursorKeys();
 
-		//this.map = this.add.tilemap('podloze');
-		//this.map.addTilesetImage('tecza');
+		this.map = this.add.tilemap('podloze');
+		this.map.addTilesetImage('tecza');
 
-		//this.world = this.map.createLayer('Tile Layer 1');
-		//this.world.resizeWorld();
+		this.world = this.map.createLayer('Tile Layer 1');
+		this.world.resizeWorld();
+        this.game.world.setBounds(0, 0, 2400, 2400);
 
-		//this.physics.startSystem(Phaser.Physics.P2JS);
 		this.physics.arcade.collide(this.player, this.map);
 
         this.camera.follow(this.player);
