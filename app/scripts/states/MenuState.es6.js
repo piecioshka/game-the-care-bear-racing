@@ -1,4 +1,4 @@
-import GameState from './states/GameState';
+import GameState from './GameState';
 
 export default {
     preload() {
@@ -17,7 +17,10 @@ export default {
     },
 
     playGame() {
-        this.state.add('GameState', GameState);
-        this.state.start('GameState');
+        console.log(this);
+        Phaser.Game.state.add('Game', GameState);
+        Phaser.Game.state.start('Game');
+        //this.state.add('GameState', GameState);
+        //this.state.start('GameState');
     }
 }
