@@ -1,6 +1,7 @@
 export default {
 	preload() {
 		this.load.image('bear1', 'images/bear1.png');
+		this.load.spritesheet('tecza', 'maps/tecza.png', 40, 40);
 
 		this.load.tilemap('podloze', 'maps/test.json', null, Phaser.Tilemap.TILED_JSON);
 	},
@@ -10,11 +11,16 @@ export default {
 		this.player.collideWorldBounds = true;
 		this.physics.arcade.enable(this.player);
 
-		var map = this.add.tilemap('podloze');
-
-		map.addTilesetImage('Plansza', 'tiles');
-
 		this.cursors = this.input.keyboard.createCursorKeys();
+
+		this.map = this.add.tilemap('podloze');
+		this.map.addTilesetImage('tecza');
+
+		this.world = this.map.createLayer('Tile Layer 1');
+		this.world.resizeWorld();
+
+		this.physics.startSystem(Phaser.Physics.ARCADE);
+		this.physics.arcade.collide(this.player, this.map);
 	},
 
 	update () {
@@ -24,6 +30,14 @@ export default {
 
 		if (this.cursors.right.isDown) {
 			this.player.body.velocity.x = 150;
+		}
+
+		if (this.cursors.up.isDown) {
+			this.player.body.velocity.y = -150;
+		}
+
+		if (this.cursors.down.isDown) {
+			this.player.body.velocity.y = 150;
 		}
 	}
 }
