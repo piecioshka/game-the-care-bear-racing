@@ -7,7 +7,7 @@ export default {
 	},
 
 	create() {
-        this.physics.startSystem(Phaser.Physics.P2JS);
+        this.physics.startSystem(Phaser.Physics.ARCADE);
 
         this.starfield = this.add.tileSprite(0, 0, 800, 600, 'background');
         this.starfield.fixedToCamera = true;
@@ -27,6 +27,10 @@ export default {
 		this.world = this.map.createLayer('Tile Layer 1');
 		this.world.resizeWorld();
 
+        this.game.world.setBounds(0, 0, 2400, 2400);
+
+		this.physics.arcade.collide(this.player, this.map);
+>>>>>>> Stashed changes
         this.camera.follow(this.player);
 	},
 
