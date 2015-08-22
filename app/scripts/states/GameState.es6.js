@@ -10,7 +10,7 @@ export default {
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
         this.starfield = this.add.tileSprite(0, 0, 2400, 2400, 'background');
-        this.starfield.fixedToCamera = true;
+        //this.starfield.fixedToCamera = true;
 
 		this.player = this.add.sprite(40, 100, 'bear1');
         this.player.anchor.setTo(0.5, 0.5);
@@ -21,9 +21,11 @@ export default {
 		this.map = this.add.tilemap('podloze');
 		this.map.addTilesetImage('tecza');
 		this.map.setCollisionBetween(0, 3600, true);
-
+        this.map.fixedToCamera = true;
+        
 		this.world = this.map.createLayer('Tile Layer 1');
 		this.world.resizeWorld();
+        this.world.setBound
 
 		this.physics.arcade.collide(this.player, this.map);
         this.camera.follow(this.player);
