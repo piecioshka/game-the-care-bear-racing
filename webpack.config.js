@@ -3,7 +3,7 @@ module.exports = {
         extensions: ['.es6.js', '.js', '']
     },
 
-    entry: './app/scripts/index',
+    entry: './app/scripts/core/main',
 
     output: {
         filename: './app/dist/game.js'
