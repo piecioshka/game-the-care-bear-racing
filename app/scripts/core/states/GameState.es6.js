@@ -1,10 +1,10 @@
 class GameState extends Phaser.State {
     preload() {
         this.load.image('bear1', 'assets/images/bear/bear1.png');
-        this.load.image('background', 'assets/images/starfield.jpg');
+        this.load.image('bg-stars', 'assets/images/starfield.jpg');
         this.load.spritesheet('rainbow', 'assets/images/rainbow.png', 40, 40);
-        this.load.spritesheet('bg', 'assets/images/bg.png', 40, 40);
-        this.load.tilemap('ground', 'assets/maps/test.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.spritesheet('bg-main', 'assets/images/bg.png', 40, 40);
+        this.load.tilemap('ground', 'assets/maps/map-1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.audio('music', [
             'assets/audio/bodenstaendig_2000_in_rock_4bit.mp3',
             'assets/audio/bodenstaendig_2000_in_rock_4bit.ogg'
@@ -13,16 +13,16 @@ class GameState extends Phaser.State {
 
     create() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
-        this.sound.play('music');
+        this.music = this.sound.play('music');
 
-        this.starfield = this.add.tileSprite(0, 0, 2400, 2400, 'background');
+        this.starfield = this.add.tileSprite(0, 0, 2400, 2400, 'bg-stars');
         this.starfield.fixedToCamera = true;
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
         let map = this.add.tilemap('ground');
         map.addTilesetImage('rainbow');
-        map.addTilesetImage('bg');
+        map.addTilesetImage('bg-main');
         map.setCollisionBetween(0, 3600, true);
         map.fixedToCamera = true;
 
@@ -38,10 +38,13 @@ class GameState extends Phaser.State {
     }
 
     update() {
-        var self = this;
         this.physics.arcade.collide(this.player, this.world, (o1, o2) => {
             if (o2.x >= 42 && o2.x <= 45 && o2.y >= 1 && o2.y <= 2) {
-                self.state.start('GameOverState');
+                this.music.stop();
+
+                setTimeout(() => {
+                    this.state.start('GameOverState');
+                }, 0);
             }
         });
 

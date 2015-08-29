@@ -7,8 +7,8 @@ class GameOverState extends Phaser.State {
     create() {
         this.add.tileSprite(0, -100, 800, 400, 'bg-game-over');
         let style = {
-            font: "32px Arial",
-            fill: "#ff0044"
+            font: '32px Arial',
+            fill: '#ff0044'
         };
         let text = this.add.text(400, 170, 'Play EGEJN', style);
         text.anchor.set(0.5, 0.5);
