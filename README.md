@@ -1,1 +1,1 @@
-Misie się ścigają!.
+Misie się ścigają!
